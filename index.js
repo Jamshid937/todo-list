@@ -1,5 +1,6 @@
 const taskInput = document.querySelector(".task-input input");
 filters = document.querySelectorAll(".filters span")
+clearAll = document.querySelector(".clear-btn")
 taskBox = document.querySelector(".task-box");
 
 let editId;
@@ -63,8 +64,15 @@ function editTask(taskId, taskName){
 function deleteTask(deletedId){
    todos.splice(deletedId, 1)
    localStorage.setItem("todo-list", JSON.stringify(todos));
-   showTodo();
+   showTodo("all");
 }
+
+
+clearAll.addEventListener("click", () =>{
+    todos.splice(0, todos.length)
+    localStorage.setItem("todo-list", JSON.stringify(todos));
+    showTodo("all");
+})
 
   function updateStatus(selectedTask){
     let taskName = selectedTask.parentElement.lastElementChild;
@@ -94,7 +102,7 @@ taskInput.addEventListener("keyup", e => {
         }
         taskInput.value = "";
         localStorage.setItem("todo-list", JSON.stringify(todos));
-        showTodo()
+        showTodo("all")
     }
 });
  
